@@ -1,11 +1,19 @@
-# Test Case 1: Basic output
-assert say_hello() == "Hello, world!", "Test Case 1 Failed"
+import unittest
+from main import Greeter
 
-# Test Case 2: Output should be a string
-assert isinstance(say_hello(), str), "Test Case 2 Failed"
+class TestGreeter(unittest.TestCase):
+    def setUp(self):
+        # Create an instance before each test
+        self.greeter = Greeter()
 
-# Test Case 3: Output should not be empty
-assert len(say_hello()) > 0, "Test Case 3 Failed"
+    def test_say_hello_returns_correct_string(self):
+        self.assertEqual(self.greeter.say_hello(), "Hello, world!")
 
-# If all tests pass:
-print("All test cases passed!")
+    def test_say_hello_returns_string_type(self):
+        self.assertIsInstance(self.greeter.say_hello(), str)
+
+    def test_say_hello_not_empty(self):
+        self.assertTrue(len(self.greeter.say_hello()) > 0)
+
+if __name__ == "__main__":
+    unittest.main()
